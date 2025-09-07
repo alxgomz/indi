@@ -992,6 +992,11 @@ bool V4L2_Driver::isIOptron()
     return strstr(getDeviceName(), "iGuider") || strstr(getDeviceName(), "iPolar");
 }
 
+bool V4L2_Driver::isSpc900Nc()
+{
+    return strstr(v4l_base->getDeviceName(), "SPC 900NC");
+}
+
 bool V4L2_Driver::setManualExposure(double duration)
 {
     /* N.B. Check how this differs from one camera to another. This is just a proof of concept for now */
@@ -1537,7 +1542,7 @@ void V4L2_Driver::newFrame()
         return;
     }
 
-    if ( PrimaryCCD.isExposing() )
+    if ( PrimaryCCD.isExposing() || isSpc900Nc() )
     {
         non_capture_frames = 0;
         if( !is_capturing )

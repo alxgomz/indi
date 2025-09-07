@@ -198,6 +198,8 @@ public:
 
         void resetDevice(int bus_num, int dev_num);
 
+        bool isSpc900Nc();
+
         /* Variables */
         INDI::V4L2_Base *v4l_base;
 
