@@ -75,13 +75,13 @@ bool XAGYLWheel::initProperties()
 
     // Settings
     IUFillNumber(&SettingsN[SETTING_SPEED], "SETTING_SPEED", "Speed", "%.f",
-                 0, 100, 10., 0.);
+                 0, 100, 10., 100.);
     IUFillNumber(&SettingsN[SETTING_JITTER], "SETTING_JITTER", "Jitter", "%.f",
-                 1, 10, 1., 0.);
+                 1, 10, 1., 2.);
     IUFillNumber(&SettingsN[SETTING_THRESHOLD], "SETTING_THRESHOLD",
-                 "Threshold", "%.f", 10, 30, 1., 0.);
+                 "Threshold", "%.f", 10, 30, 1., 20.);
     IUFillNumber(&SettingsN[SETTING_PW], "SETTING_PW", "Pulse", "%.f",
-                 100, 10000, 100., 0.);
+                 100, 10000, 100., 20.);
     IUFillNumberVector(&SettingsNP, SettingsN, 4, getDeviceName(), "Settings",
                        "Settings", SETTINGS_TAB, IP_RW, 0, IPS_IDLE);
 
