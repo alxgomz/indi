@@ -946,6 +946,14 @@ bool V4L2_Driver::StartExposure(float duration)
 
 bool V4L2_Driver::setShutter(double duration)
 {
+    exposure_duration.tv_sec  = (long) duration;
+    exposure_duration.tv_usec = (long) ((duration - (double) exposure_duration.tv_sec) * 1000000.0f);
+
+    elapsed_exposure.tv_sec = 0;
+    elapsed_exposure.tv_usec = 0;
+
+    gettimeofday(&capture_start, nullptr);
+
     if (lx->isEnabled())
     {
         LOGF_INFO("Using long exposure mode for %.3f sec frame.", duration);
@@ -963,14 +971,6 @@ bool V4L2_Driver::setShutter(double duration)
     }
     else if (setManualExposure(duration))
     {
-        exposure_duration.tv_sec  = (long) duration;
-        exposure_duration.tv_usec = (long) ((duration - (double) exposure_duration.tv_sec) * 1000000.0f);
-
-        elapsed_exposure.tv_sec = 0;
-        elapsed_exposure.tv_usec = 0;
-
-        gettimeofday(&capture_start, nullptr);
-
         frameCount    = 0;
         subframeCount = 0;
 
